@@ -16,7 +16,7 @@ jobs:
 
       - name: Extract Android project
         run: |
-          mkdir extracted
+          mkdir -p extracted
           unzip -o hybrid-v4-trader-android-starter.zip -d extracted
           cp extracted/settings.gradle .
           cp extracted/build.gradle .
@@ -35,6 +35,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
 
       - name: Build APK
         run: gradle assembleDebug
