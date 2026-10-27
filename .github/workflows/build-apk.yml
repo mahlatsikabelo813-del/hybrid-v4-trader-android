@@ -14,12 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract Android project
+      - name: Extract complete Android project
         run: |
           mkdir -p extracted
-          unzip -o hybrid-v4-trader-android-starter.zip -d extracted
+          unzip -o hybrid-v4-trader-android-complete.zip -d extracted
           cp extracted/settings.gradle .
           cp extracted/build.gradle .
+          cp extracted/gradle.properties .
+          rm -rf app
           cp -r extracted/app .
 
       - name: Set up Java
