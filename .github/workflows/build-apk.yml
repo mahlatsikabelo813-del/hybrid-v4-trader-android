@@ -14,13 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract updated Android project
+      - name: Extract corrected Android project
         run: |
+          set -e
           mkdir -p extracted
-          unzip -o Hybrid_V4_Android_Project_Fixed.zip -d extracted
+          unzip -o Hybrid_V4_Android_Project_Fixed_v2.zip -d extracted
+
           cp extracted/settings.gradle .
           cp extracted/build.gradle .
           cp extracted/gradle.properties .
+
           rm -rf app
           cp -r extracted/app .
 
@@ -32,8 +35,6 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
